@@ -24,9 +24,7 @@ namespace ExportReportXml
             var collectionReport = database.GetCollection<ReportEaInfo>("reporteainfo");
             var collectionSurvey = database.GetCollection<SurveyData>("survey");
             var countCells = 4;
-            var getIDReport = collectionReport.Find(it=> it._id == "11002061000110").ToList();
-
-            //var getIDReport = collectionReport.Find(x => x._id == "21201062001003").ToList();
+            var getIDReport = collectionReport.Find(it=>true).ToList();
             using (var excelPackage = new ExcelPackage())
             {
                 var worksheet = excelPackage.Workbook.Worksheets.Add($"EA Report");
