@@ -1,4 +1,4 @@
-﻿using MongoDB.Driver;
+using MongoDB.Driver;
 using System;
 using System.Linq;
 using WebManageAPI.Models;
@@ -24,7 +24,7 @@ namespace ExportReportXml
             var collectionReport = database.GetCollection<ReportEaInfo>("reporteainfo");
             var collectionSurvey = database.GetCollection<SurveyData>("survey");
             var countCells = 4;
-            var getIDReport = collectionReport.AsQueryable().ToList();
+            var getIDReport = collectionReport.Find(it=> it._id == "11002061000110").ToList();
 
             //var getIDReport = collectionReport.Find(x => x._id == "21201062001003").ToList();
             using (var excelPackage = new ExcelPackage())
@@ -47,10 +47,10 @@ namespace ExportReportXml
                 worksheet.Cells["H1"].Value = "สน1(อาคาร)";
 
                 worksheet.Cells["L1:Q1"].Merge = true;
-                worksheet.Cells["L1"].Value = "สน2(ครัวเรือน)";
+                worksheet.Cells["L1"].Value = "สน1(ครัวเรือน)";
 
-                worksheet.Cells["R2:T2"].Merge = true;
-                worksheet.Cells["R2"].Value = "สน2";
+                worksheet.Cells["R1:T1"].Merge = true;
+                worksheet.Cells["R1"].Value = "สน2";
 
                 worksheet.Cells["A1"].Value = "จังหวัด";
                 worksheet.Cells["B1"].Value = "อำเภอ";
@@ -66,7 +66,6 @@ namespace ExportReportXml
                 worksheet.Cells["I2"].Value = "สมบูรณ์";
                 worksheet.Cells["J2"].Value = "บ้านว่าง/ร้าง";
                 worksheet.Cells["K2"].Value = "3ครั้งไม่พบ";
-
 
                 worksheet.Cells["L2"].Value = "ทั้งหมด";
                 worksheet.Cells["M2"].Value = "สมบูรณ์";
@@ -120,16 +119,16 @@ namespace ExportReportXml
                         {
                             //building
                             var AllCountBuild = list.Count(it => it.SampleType == "b");
-                            var CompletCountBuild = list.Count(it => it.Status == "done-all" && it.Status == "b");
-                            var sadCountBuild = list.Count(it => it.Status == "sad" && it.Status == "b");
-                            var eye_offCountBuild = list.Count(it => it.Status == "eye-off" && it.Status == "b");
+                            var CompletCountBuild = list.Count(it => it.Status == "done-all" && it.SampleType == "b");
+                            var sadCountBuild = list.Count(it => it.Status == "sad" && it.SampleType == "b");
+                            var eye_offCountBuild = list.Count(it => it.Status == "eye-off" && it.SampleType == "b");
 
                             var AllCountUnit = list.Count(it => it.SampleType == "u");
-                            var CompletCountUnit = list.Count(it => it.Status == "done-all" && it.Status == "u");
-                            var sadCountUnit = list.Count(it => it.Status == "sad" && it.Status == "u");
-                            var eye_offCountUnit = list.Count(it => it.Status == "eye-off" && it.Status == "u");
-                            var mic_offCountUnit = list.Count(it => it.Status == "mic-off" && it.Status == "u");
-                            var pauseCountUnit = list.Count(it => it.Status == "pause" || it.Status == "refresh" && it.Status == "u");
+                            var CompletCountUnit = list.Count(it => it.Status == "complete" && it.SampleType == "u");
+                            var sadCountUnit = list.Count(it => it.Status == "sad" && it.SampleType == "u");
+                            var eye_offCountUnit = list.Count(it => it.Status == "eye-off" && it.SampleType == "u");
+                            var mic_offCountUnit = list.Count(it => it.Status == "mic-off" && it.SampleType == "u");
+                            var pauseCountUnit = list.Count(it => it.Status == "pause" || it.Status == "refresh" && it.SampleType == "u");
 
                             var commUnityTypeAll = list.Count(it => it.SampleType == "c");
                             var CompletcommUnityType = list.Count(it => it.SampleType == "c" && it.Status == "done-all");
