@@ -120,12 +120,12 @@ namespace ExportReportXml
                         {
                             //building
                             var AllCountBuild = list.Count(it => it.SampleType == "b");
-                            var CompletCountBuild = list.Count(it => it.Status == "done-all " && it.Status == "b");
+                            var CompletCountBuild = list.Count(it => it.Status == "done-all" && it.Status == "b");
                             var sadCountBuild = list.Count(it => it.Status == "sad" && it.Status == "b");
                             var eye_offCountBuild = list.Count(it => it.Status == "eye-off" && it.Status == "b");
 
                             var AllCountUnit = list.Count(it => it.SampleType == "u");
-                            var CompletCountUnit = list.Count(it => it.Status == "done-all " && it.Status == "u");
+                            var CompletCountUnit = list.Count(it => it.Status == "done-all" && it.Status == "u");
                             var sadCountUnit = list.Count(it => it.Status == "sad" && it.Status == "u");
                             var eye_offCountUnit = list.Count(it => it.Status == "eye-off" && it.Status == "u");
                             var mic_offCountUnit = list.Count(it => it.Status == "mic-off" && it.Status == "u");
