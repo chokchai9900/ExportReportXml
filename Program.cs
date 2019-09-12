@@ -82,15 +82,15 @@ namespace ExportReportXml
                     {
                     var getdataSurvey = collectionSurvey.Find(x => x.EA == item._id && x.DeletionDateTime == null && x.Enlisted == true ).ToList();
 
-                    if (getdataSurvey == null)
+                    if (getdataSurvey.Count() == 0)
                     {
 
-                        worksheet.Cells[countCells, 1].Value = item.REG_NAME;
+                        worksheet.Cells[countCells, 1].Value = item.CWT_NAME;
                         worksheet.Cells[countCells, 2].Value = item.AMP_NAME;
                         worksheet.Cells[countCells, 3].Value = item.TAM_NAME;
                         worksheet.Cells[countCells, 4].Value = item.DISTRICT;
                         worksheet.Cells[countCells, 5].Value = item.EA;
-                        worksheet.Cells[countCells, 6].Value = item.ApproveByFs == null ? "0" : item.ApproveByFs;
+                        worksheet.Cells[countCells, 6].Value = item.ApproveByFs ?? "0";
                         worksheet.Cells[countCells, 7].Value = "-";
 
                         worksheet.Cells[countCells, 8].Value = "-";
@@ -110,9 +110,7 @@ namespace ExportReportXml
                         worksheet.Cells[countCells, 20].Value = "-";
                         Console.Write($"{count} : ");
                         Console.WriteLine($"{item._id} Faill !!");
-                        count++;
                         countCells++;
-
                     }
                     else
                     {
@@ -143,7 +141,7 @@ namespace ExportReportXml
                             worksheet.Cells[countCells, 3].Value = item.TAM_NAME;
                             worksheet.Cells[countCells, 4].Value = item.DISTRICT;
                             worksheet.Cells[countCells, 5].Value = item.EA;
-                            worksheet.Cells[countCells, 6].Value = item.ApproveByFs == null ? "0" : item.ApproveByFs;
+                            worksheet.Cells[countCells, 6].Value = item.ApproveByFs ?? "0";
                             worksheet.Cells[countCells, 7].Value = list.Key;
 
                             worksheet.Cells[countCells, 8].Value = AllCountBuild;
@@ -164,10 +162,10 @@ namespace ExportReportXml
 
                             Console.Write($"{count} : ");
                             Console.WriteLine($"{list.Key} Complet !!");
-                            count++;
                             countCells++;
                         }
                     }
+                    count++;
                 }
                 excelPackage.SaveAs(new FileInfo(partFile));
             }
