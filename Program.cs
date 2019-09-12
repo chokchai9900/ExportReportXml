@@ -25,6 +25,8 @@ namespace ExportReportXml
             var collectionSurvey = database.GetCollection<SurveyData>("survey");
             var countCells = 4;
             var getIDReport = collectionReport.Find(it=>true).ToList();
+
+            //var getIDReport = collectionReport.Find(x => x._id == "21201062001003").ToList();
             using (var excelPackage = new ExcelPackage())
             {
                 var worksheet = excelPackage.Workbook.Worksheets.Add($"EA Report");
@@ -106,6 +108,10 @@ namespace ExportReportXml
                         worksheet.Cells[countCells, 18].Value = "-";
                         worksheet.Cells[countCells, 19].Value = "-";
                         worksheet.Cells[countCells, 20].Value = "-";
+                        Console.Write($"{count} : ");
+                        Console.WriteLine($"{item._id} Faill !!");
+                        count++;
+                        countCells++;
 
                     }
                     else
